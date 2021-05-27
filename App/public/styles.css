@@ -1,0 +1,22 @@
+h1 {
+  color: black;
+}
+
+body {
+  background-color: #f2f2eb;
+}
+
+h4 {
+  margin-top: 20px;
+  color: gray;
+  padding: 25px;
+}
+
+p {
+  margin-left: 2rem;
+  font-weight: bold;
+}
+
+.Head {
+  background-color: #bbedf2;
+}

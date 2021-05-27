@@ -1,0 +1,26 @@
+{
+  "name": "co-med",
+  "version": "1.0.0",
+  "description": "",
+
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "author": "Shanul",
+  "license": "ISC",
+  "dependencies": {
+    "atom-ide-debugger-node": "^0.7.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.1",
+    "curl": "^0.1.4",
+    "dotenv": "^9.0.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jQuery": "^1.7.4",
+    "nodemon": "^2.0.7",
+    "prompt-sync": "^4.2.0",
+    "request": "^2.88.2"
+  }
+}

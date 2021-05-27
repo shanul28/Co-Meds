@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vaccine Slot details</title>
+  </head>
+  <body>
+<h1> Available Slots of Vaccines are:  </h1>
+
+<form  action="/slot-details.ejs" method="post">
+
+
+<ul>
+
+ <%  for(var i = 0; i< hospital.length ;i++ ){ %>
+
+    <li> <%= hospital[i] %> </li>
+
+
+
+  <% } %>
+
+  </ul>
+
+</form>
+
+  </body>
+</html>
