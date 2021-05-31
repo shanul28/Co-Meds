@@ -1,11 +1,13 @@
+const config = require("config")
 const express = require("express")
 const https = require("https")
 
 class VaccineSlotService {
   constructor() {}
-
-
-  // function which make https Get request to Cowin server.
+   /** 
+   * getFormattedDate() method formats the 
+   * data into DD-MM-YYYY or D-M-YYYY.*
+   */
   getFormattedDate = (d) => {
     if(!d) {
       throw new Error('Vaccine fetch date is empty');
@@ -19,11 +21,15 @@ class VaccineSlotService {
           return today;
   }
 
-
+   /** 
+   * fetchSlots() method make a https GET request 
+   * to Cowin API setu server and collects whole 
+   * schema data of vaccines and return a 
+   * promise object. 
+   */
   fetchSlots = (districtCode , date) => {
     const formattedDate = this.getFormattedDate(date);
-
-    const url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=" + districtCode + "&date=" + formattedDate;
+    const url = config.get("http.parameters.get_calendar_by_district_url")+"district_id="+districtCode+"&"+"date="+formattedDate;
 
     var promise = new Promise((resolve, reject) => {
       https.get(url, function (response) {
@@ -47,5 +53,5 @@ class VaccineSlotService {
   }
 }
 
-
+// exporting VaccineSlotService class.
 module.exports = VaccineSlotService
