@@ -8,12 +8,21 @@ class VaccineSlotScheduler {
 
     constructor() {}
 
-    /** * The schedule() method retrieves data by calling executeTask() at given time intreval.*/
+    /** 
+     * The schedule() method retrieves data 
+     * by calling executeTask() at given 
+     * time intreval.
+     */
     schedule() {
         setInterval(this.executeTask , time);
     }
 
-    /** * The executeTask() method fetches slots of given district code and date and parse that data into a flat list if response code is 200   */
+    /**  
+     *  The executeTask() method fetches slots
+     *  of given district code and date and parse
+     *  that data into a flat list if 
+     *  response code is 200   
+     */
     executeTask() {
         const vaccineSlotService = new VaccineSlotService();
         const slotPromise = vaccineSlotService.fetchSlots(districtCode, new Date());

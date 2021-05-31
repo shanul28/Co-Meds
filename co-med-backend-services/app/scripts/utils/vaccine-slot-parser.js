@@ -1,7 +1,11 @@
 class VaccineSlotParser {
     constructor() {}
 
-    /** * The method transforms the schema JSON, received from the API call, into a flat JSON array. */
+    /** 
+     * The method transforms the schema JSON, 
+     * received from the API call, 
+     * into a flat JSON array. 
+     */
     static parse(schemaJson) {
         const flatSlotArray = []; 
         const centers = schemaJson.centers ;
@@ -18,7 +22,11 @@ class VaccineSlotParser {
         return flatSlotArray ;
     }
 
-    /** * createFlatObject() extracts desired data like pincode , available vaccine dose etc from a center & session */
+    /** 
+     * createFlatObject() extracts desired data like
+     *  pincode , available vaccine dose etc
+     *  from a center & session. 
+     */
     static _createFlatObject(center, session) {
         return {
             center_id: center.center_id,
