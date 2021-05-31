@@ -4,11 +4,11 @@ const VaccineSlotParser = require("../utils/vaccine-slot-parser");
 
 const districtCode = config.get('http.parameters.district_code');
 const time = config.get("scheduler.time_interval_in_ms");
+
 class VaccineSlotScheduler {
 
-    constructor() {}
-
-    /** 
+      constructor() {}
+     /** 
      * The schedule() method retrieves data 
      * by calling executeTask() at given 
      * time intreval.
@@ -16,8 +16,7 @@ class VaccineSlotScheduler {
     schedule() {
         setInterval(this.executeTask , time);
     }
-
-    /**  
+     /**  
      *  The executeTask() method fetches slots
      *  of given district code and date and parse
      *  that data into a flat list if 
@@ -42,5 +41,5 @@ class VaccineSlotScheduler {
 
 
 }
- //exporting VaccineSlotScheduler class.
+//exporting VaccineSlotScheduler class.
 module.exports = VaccineSlotScheduler

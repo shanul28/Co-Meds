@@ -1,6 +1,5 @@
 class VaccineSlotParser {
     constructor() {}
-
     /** 
      * The method transforms the schema JSON, 
      * received from the API call, 
