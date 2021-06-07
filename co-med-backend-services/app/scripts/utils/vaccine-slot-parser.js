@@ -1,3 +1,6 @@
+const DAO = require("../vaccine-slot-DB/DAO.js");
+const Dao = new DAO(); 
+
 class VaccineSlotParser {
     constructor() {}
     /** 
@@ -16,9 +19,9 @@ class VaccineSlotParser {
                 const obj = VaccineSlotParser._createFlatObject(center, session);
                 flatSlotArray.push(obj);
             } 
-        }
-        console.log(flatSlotArray);
-        return flatSlotArray ;
+        }   
+            Dao.insertInDB(flatSlotArray);
+           return flatSlotArray ;
     }
 
     /** 
@@ -28,11 +31,12 @@ class VaccineSlotParser {
      */
     static _createFlatObject(center, session) {
         return {
+            id: "696" + "-" + center.pincode + "-" + center.center_id + "-" + session.date,
             center_id: center.center_id,
             name: center.name,
             pincode: center.pincode,
             date: session.date,
-            available_capacity: session.available_capacity
+            available_capacity: session.available_capacity+1,
         }
     }
 }

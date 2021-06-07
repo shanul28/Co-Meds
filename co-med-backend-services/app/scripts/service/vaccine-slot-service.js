@@ -4,9 +4,10 @@ const https = require("https")
 
 class VaccineSlotService {
   constructor() {}
-   /** 
+
+  /** 
    * getFormattedDate() method formats the 
-   * data into DD-MM-YYYY or D-M-YYYY.*
+   * data into DD-MM-YYYY or D-M-YYYY.
    */
   getFormattedDate = (d) => {
     if(!d) {
@@ -21,7 +22,7 @@ class VaccineSlotService {
           return today;
   }
 
-   /** 
+  /** 
    * fetchSlots() method make a https GET request 
    * to Cowin API setu server and collects whole 
    * schema data of vaccines and return a 

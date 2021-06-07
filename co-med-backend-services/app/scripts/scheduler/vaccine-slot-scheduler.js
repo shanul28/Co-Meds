@@ -31,6 +31,7 @@ class VaccineSlotScheduler {
             const flatSlots = VaccineSlotParser.parse(schemaJson);
 
             // upsert flatSlots into mongo db.
+            
         } ).catch( responseStatus => {
             //catch method runs when response code isn't 200.
             console.error("Vaccine Slot API failed with status " + responseStatus);

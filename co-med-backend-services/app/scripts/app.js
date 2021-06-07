@@ -3,6 +3,7 @@ const app = express();
 const CoMedApp = require("./co-med-app");
 
 console.log("Initializing Co-Med app...");
+
 new CoMedApp();
 console.log("Co-Med app initialized successfully...");
 
