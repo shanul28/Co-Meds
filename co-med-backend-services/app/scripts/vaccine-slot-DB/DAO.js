@@ -2,8 +2,14 @@ const MongodbSetup = require("./vaccine-db");
 const mongodbSetup = new MongodbSetup();
 const VaccineModel = mongodbSetup.makeModel();
 
-// const districtCode = config.get('http.parameters.district_code');
-class DAO{
+/**
+ * DAO class has two method 
+ * 1.insertInDB() - 
+ *      It performs upsert operation into CoMedDB
+ * 2. removeDataByDay()-
+ *      It performs deletion operation on CoMedDB
+ */
+class DAO {
         
         constructor(){}
 
@@ -44,6 +50,43 @@ class DAO{
                 }
                 }); */
         }
+        /**
+         * removeDataByDay() checks if 
+         * today's date string and Slot's date string
+         * are equal then it performs deleteOne operation
+         * and push the query into removeQueryArray[]
+         */
+        removeDataByDay(flatArray){
+                const removeQuery = [];
+              
+                flatArray.forEach(object => {
+                       if (object.date === object.today_date){
+                                const query = {
+                                        deleteOne: {    
+                                        filter: {
+                                                 id: object.id
+                                                }
+                                        }
+                                }
+                                removeQuery.push(query);
+                        }
+                });
+                /**
+                 * if removeQuery has any query
+                 * then bulWrite() performs deleteOne 
+                 * operation in bulk 
+                 */
+                if(removeQuery.length != 0){
+                        VaccineModel.bulkWrite(removeQuery, (err, res) => {
+                        if (err) {
+                                console.log("Error , documents not deleted - " + err);
+                        } else {
+                                console.log("documents deleted -" + res);
+                        }
+                        })
+                }
+
+        } 
 }
 
 module.exports = DAO

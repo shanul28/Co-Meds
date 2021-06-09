@@ -12,12 +12,10 @@ class MongodbSetup{
     makeModel(){
     
         const url = config.get("mongo.parameter.uri") +"CoMedDB";
-        mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true}).then(() => console.log('MongoDB Connected...')).catch((err) => console.log(err));
+        mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch((err) => console.log(err));
         
             const VaccineSchema = new Schema();
            
-            
-        //    VaccineSchema.vaccineSlotSchema().index({age: 1 });
             const VaccineDataByDistrict = mongoose.model("VaccineFlatData", VaccineSchema.vaccineSlotSchema());
             
         

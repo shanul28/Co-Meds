@@ -1,5 +1,6 @@
-const DAO = require("../vaccine-slot-DB/DAO.js");
-const Dao = new DAO(); 
+const moment = require("moment");
+const config = require("config");
+const districtCode = config.get("http.parameters.district_code");
 
 class VaccineSlotParser {
     constructor() {}
@@ -20,8 +21,7 @@ class VaccineSlotParser {
                 flatSlotArray.push(obj);
             } 
         }   
-            Dao.insertInDB(flatSlotArray);
-           return flatSlotArray ;
+        return flatSlotArray ;
     }
 
     /** 
@@ -31,12 +31,22 @@ class VaccineSlotParser {
      */
     static _createFlatObject(center, session) {
         return {
-            id: "696" + "-" + center.pincode + "-" + center.center_id + "-" + session.date,
+            id: districtCode + "-" + center.pincode + "-" + center.center_id + "-" + session.date,
             center_id: center.center_id,
             name: center.name,
             pincode: center.pincode,
             date: session.date,
-            available_capacity: session.available_capacity+1,
+            available_capacity: session.available_capacity,
+            address: center.address,
+            block_name: center.block_name,
+            lat: center.lat,
+            long: center.long,
+            fee_type: center.fee_type,
+            available_capacity_dose1: session.available_capacity_dose1,
+            available_capacity_dose2: session.available_capacity_dose2,
+            min_age_limit: session.min_age_limit,
+            vaccine: session.vaccine,
+            today_date: moment().format("DD-MM-YYYY")
         }
     }
 }

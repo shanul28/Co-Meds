@@ -1,9 +1,14 @@
 const config = require("config");
 const VaccineSlotService = require("../service/vaccine-slot-service");
 const VaccineSlotParser = require("../utils/vaccine-slot-parser");
-
+const removeDocSchedule = require("./remove-doc-scheduler")
+const removeSchedule = new removeDocSchedule();
+const DAO = require("../vaccine-slot-DB/DAO");
+const dao = new DAO();
 const districtCode = config.get('http.parameters.district_code');
 const time = config.get("scheduler.time_interval_in_ms");
+
+
 
 class VaccineSlotScheduler {
 
@@ -15,6 +20,7 @@ class VaccineSlotScheduler {
      */
     schedule() {
         setInterval(this.executeTask , time);
+        removeSchedule.scheduleRemove();
     }
      /**  
      *  The executeTask() method fetches slots
@@ -29,7 +35,7 @@ class VaccineSlotScheduler {
         slotPromise.then( schemaJson => {
             // parse slots data and make a flat list.
             const flatSlots = VaccineSlotParser.parse(schemaJson);
-
+            dao.insertInDB(flatSlots);
             // upsert flatSlots into mongo db.
             
         } ).catch( responseStatus => {

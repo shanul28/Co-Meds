@@ -3,7 +3,7 @@ const express = require("express")
 const https = require("https")
 
 class VaccineSlotService {
-  constructor() {}
+  constructor(){}
 
   /** 
    * getFormattedDate() method formats the 
