@@ -3,25 +3,25 @@ const config = require("config");
 const districtCode = config.get("http.parameters.district_code");
 
 class VaccineSlotParser {
-    constructor() {}
+    constructor() { }
     /** 
      * The method transforms the schema JSON, 
      * received from the API call, 
      * into a flat JSON array. 
      */
     static parse(schemaJson) {
-        const flatSlotArray = []; 
-        const centers = schemaJson.centers ;
-        for(var i = 0; i< centers.length ; i++) {
+        const flatSlotArray = [];
+        const centers = schemaJson.centers;
+        for (var i = 0; i < centers.length; i++) {
             const center = centers[i] || {};
             const sessions = center.sessions || [];
-            for(var j = 0; j< sessions.length; j++){
+            for (var j = 0; j < sessions.length; j++) {
                 const session = sessions[j] || {};
                 const obj = VaccineSlotParser._createFlatObject(center, session);
                 flatSlotArray.push(obj);
-            } 
-        }   
-        return flatSlotArray ;
+            }
+        }
+        return flatSlotArray;
     }
 
     /** 
@@ -46,10 +46,10 @@ class VaccineSlotParser {
             available_capacity_dose2: session.available_capacity_dose2,
             min_age_limit: session.min_age_limit,
             vaccine: session.vaccine,
-            today_date: moment().format("DD-MM-YYYY")
+            vaccine_date: moment(session.date, "DD-MM-YYYY")
+
         }
     }
 }
-
 //exporting VaccineSlotParser class
 module.exports = VaccineSlotParser

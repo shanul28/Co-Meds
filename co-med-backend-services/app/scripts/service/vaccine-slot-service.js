@@ -1,25 +1,24 @@
 const config = require("config")
-const express = require("express")
 const https = require("https")
 
 class VaccineSlotService {
-  constructor(){}
+  constructor() { }
 
   /** 
    * getFormattedDate() method formats the 
    * data into DD-MM-YYYY or D-M-YYYY.
    */
   getFormattedDate = (d) => {
-    if(!d) {
+    if (!d) {
       throw new Error('Vaccine fetch date is empty');
     }
 
     const day = d.getDate(),
-          month = d.getMonth() + 1,
-          year = d.getFullYear(),
-          today = day + "-" + month + "-" + year;
-    
-          return today;
+      month = d.getMonth() + 1,
+      year = d.getFullYear(),
+      today = day + "-" + month + "-" + year;
+
+    return today;
   }
 
   /** 
@@ -28,9 +27,9 @@ class VaccineSlotService {
    * schema data of vaccines and return a 
    * promise object. 
    */
-  fetchSlots = (districtCode , date) => {
+  fetchSlots = (districtCode, date) => {
     const formattedDate = this.getFormattedDate(date);
-    const url = config.get("http.parameters.get_calendar_by_district_url")+"district_id="+districtCode+"&"+"date="+formattedDate;
+    const url = config.get("http.parameters.get_calendar_by_district_url") + "district_id=" + districtCode + "&" + "date=" + formattedDate;
 
     var promise = new Promise((resolve, reject) => {
       https.get(url, function (response) {
